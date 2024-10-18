@@ -5,6 +5,7 @@
 /todo.txt
 /.pnp
 .pnp.js
+.env
 .yarn/install-state.gz
 
 # testing

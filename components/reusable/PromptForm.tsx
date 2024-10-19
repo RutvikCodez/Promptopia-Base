@@ -18,6 +18,8 @@ const PromptForm = ({
     resolver: ArrayToZodResolver(promptFormData),
   });
   const isSubmitting = form.formState.isSubmitting;
+  form.setValue('prompt', promptDefaultValue);
+  form.setValue('tag', tagDefaultValue);
   return (
     <section className="w-full flex flex-col justify-start items-start gap-10">
       <TitleDesc subtitle={title} desc={desc} />

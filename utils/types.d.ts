@@ -126,3 +126,14 @@ export type updatePromptFormDataType = {
 export type Slug = {
   id: string;
 };
+
+export type searchFormType = {
+  setPosts: React.Dispatch<React.SetStateAction<postType[]>>;
+};
+
+export type userType = {
+  email?: string;
+  image?: string;
+  name?: string;
+  id: string;
+};

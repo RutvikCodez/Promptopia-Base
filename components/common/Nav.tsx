@@ -1,44 +1,14 @@
 "use client";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { Button } from "@components/ui/button";
+import { userType } from "@utils/types";
+import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
-import useProviders from "../provider/useProvider";
+import React from "react";
 
-
-const Nav = () => {
-  const session = useSession();
-  const providers = useProviders();
-  const [toggleDropDown, setToggleDropDown] = useState<boolean>(false);
-  const handleSignOut = () => {
-    setToggleDropDown(false);
-    signOut();
-  };
-
-  const renderProviders = () =>
-    providers &&
-    Object.values(providers).map((provider, index) => (
-      <button
-        key={index}
-        type="button"
-        onClick={() => signIn(provider.id)}
-        className="black_btn"
-      >
-        Sign In
-      </button>
-    ));
-  const linkData = [
-    {
-      path: "/profile",
-      name: "My Profile",
-    },
-    {
-      path: "/create-prompt",
-      name: "Create Prompt",
-    },
-  ];
+const Nav = ({ image, id }: userType) => {
   return (
-    <nav className="flex-between w-full mb-16 pt-3">
+    <header className="flex justify-between items-center p-3 w-full">
       <Link href={"/"} className="flex gap-2 flex-center">
         <Image
           src={"/assets/images/logo.svg"}
@@ -47,27 +17,29 @@ const Nav = () => {
           height={30}
           className="object-contain"
         />
-        <p className="logo_text">Propmtopia</p>
+        <p className="max-sm:hidden font-satoshi font-semibold text-lg text-black tracking-wide">
+          Propmtopia
+        </p>
       </Link>
       <div className="sm:flex hidden">
-        {session.data?.user ? (
+        {id ? (
           <div className="flex gap-3 md:gap-5">
-            <Link href={"/create-prompt"} className="black_btn">
+            <Link href={"/create-prompt"} className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center">
               Create Post
             </Link>
-            <button
+            <Button
               type="button"
               onClick={() => {
                 signOut();
               }}
-              className="outline_btn"
+              className="ounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center"
               aria-label="Sign Out"
             >
               Sign Out
-            </button>
+            </Button>
             <Link href={"/profile"}>
               <Image
-                src={session.data.user.image || "/assets/images/logo.svg"}
+                src={image || "/assets/images/logo.svg"}
                 alt="Profile"
                 width={37}
                 height={37}
@@ -76,50 +48,16 @@ const Nav = () => {
             </Link>
           </div>
         ) : (
-          renderProviders()
+          <Button
+            type="button"
+            onClick={() => signIn("google")}
+            className="rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center"
+          >
+            Sign In
+          </Button>
         )}
       </div>
-      <div className="sm:hidden flex relative">
-        {session.data?.user ? (
-          <div className="flex">
-            <Image
-              src={session.data.user.image || "/assets/images/logo.svg"}
-              alt="Profile"
-              width={37}
-              height={37}
-              className="rounded-full"
-              onClick={() => {
-                setToggleDropDown(!toggleDropDown);
-              }}
-            />
-            {toggleDropDown && (
-              <div className="dropdown">
-                {linkData.map(({ name, path }, index) => (
-                  <Link
-                    key={index}
-                    href={path}
-                    className="dropdown_link"
-                    onClick={() => setToggleDropDown(false)}
-                  >
-                    {name}
-                  </Link>
-                ))}
-                <button
-                  type="button"
-                  onClick={handleSignOut}
-                  className="mt-5 w-full black_btn"
-                  aria-label="Sign Out"
-                >
-                  Sign Out
-                </button>
-              </div>
-            )}
-          </div>
-        ) : (
-          renderProviders()
-        )}
-      </div>
-    </nav>
+    </header>
   );
 };
 

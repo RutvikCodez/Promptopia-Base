@@ -20,13 +20,14 @@ const PromptCard = ({
     navigator.clipboard.writeText(prompt);
     setTimeout(() => setCopied(""), 3000);
   };
+
   return (
     <Card className="flex-1 break-inside-avoid rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-2 backdrop-blur-lg backdrop-filter w-full h-fit">
       <CardHeader className="w-full">
         <div className="flex w-full justify-between items-center">
           <div className="flex items-center gap-3 cursor-pointer">
             <Image
-              src={userImage}
+              src={userImage || "/assets/icons/tick.svg"}
               alt="user_image"
               width={40}
               height={40}

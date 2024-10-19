@@ -2,17 +2,24 @@ import type { Metadata } from "next";
 import "@styles/globals.css";
 import Nav from "@components/common/Nav";
 import Provider from "@components/common/Provider";
+import { getSessionId } from "@utils/getSessionId";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@utils/authOption";
 
 export const metadata: Metadata = {
   title: "Promptopia",
   description: "Discover & Share AI Prompts",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user.id) {
+    return <>Not Authorized</>;
+  }
   return (
     <html lang="en">
       <body>
@@ -20,8 +27,8 @@ export default function RootLayout({
           <div className="main">
             <div className="gradient" />
           </div>
-          <main className="app">
-            <Nav />
+          <main className="relative z-10 flex justify-center items-center flex-col max-w-6xl mx-auto gap-14">
+            <Nav id={session?.user.id} image={session?.user.image || ""} />
             {children}
           </main>
         </Provider>

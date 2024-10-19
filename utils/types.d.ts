@@ -1,4 +1,4 @@
-import { FunctionComponent, HTMLInputTypeAttribute } from "react";
+import { FunctionComponent, HTMLInputTypeAttribute, ReactNode } from "react";
 import { Control, UseFormGetValues, UseFormWatch } from "react-hook-form";
 import { z } from "zod";
 
@@ -137,3 +137,16 @@ export type userType = {
   name?: string;
   id: string;
 };
+
+export type drawerType = {
+  direction?: "left" | "top" | "bottom" | "right" | undefined;
+  open?: boolean | undefined;
+  onOpenChange?: ((open: boolean) => void) | undefined;
+  trigger: ReactNode;
+  children: ReactNode;
+};
+
+export type commonNavbarType = {
+  userID: string
+  children: ReactNode
+}

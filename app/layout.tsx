@@ -5,6 +5,7 @@ import Provider from "@components/common/Provider";
 import { getSessionId } from "@utils/getSessionId";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@utils/authOption";
+import MobileNavbar from "@components/common/MobileNavbar";
 
 export const metadata: Metadata = {
   title: "Promptopia",
@@ -17,9 +18,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions);
-  if (!session?.user.id) {
-    return <>Not Authorized</>;
-  }
   return (
     <html lang="en">
       <body>
@@ -27,8 +25,9 @@ export default async function RootLayout({
           <div className="main">
             <div className="gradient" />
           </div>
-          <main className="relative z-10 flex justify-center items-center flex-col max-w-6xl mx-auto gap-14">
-            <Nav id={session?.user.id} image={session?.user.image || ""} />
+          <main className="relative z-10 flex justify-center items-center flex-col max-w-6xl mx-auto gap-14 max-md:px-5">
+            <Nav id={session?.user.id || ""} image={session?.user.image || ""} />
+            <MobileNavbar id={session?.user.id || ""} image={session?.user.image || ""} />
             {children}
           </main>
         </Provider>

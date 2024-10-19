@@ -18,7 +18,6 @@ export const searchFormData: magicField[] = [
         .trim(),
       className:
         "w-full-rounded-md block border bordergray-200 bg-white font-satoshi text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0 peer text-center",
-      defaultValue: " ",
     },
     RenderComponent: CustomInput,
   },
@@ -60,3 +59,14 @@ export const promptFormData: magicField[] = [
   },
 ];
 
+
+export const navData = [
+  {
+    href: "/profile",
+    name: "My Profile",
+  },
+  {
+    href: "/create-prompt",
+    name: "Create Prompt"
+  }
+]

@@ -1,22 +1,26 @@
-import MyProfile from "@components/profile/MyProfile";
-import { authOptions } from "@utils/authOption";
-import { getServerSession } from "next-auth";
+import Profile from "@components/profile/Profile";
+import TitleDesc from "@components/reusable/TitleDesc";
+import { apiCall } from "@utils/apiCall";
+import { getSessionId } from "@utils/getSessionId";
+import { postType } from "@utils/types";
 import React from "react";
 
 const page = async () => {
-  const session = await getServerSession(authOptions);
-  if (!session || !session.user || !session.user.id) {
-    console.log(session?.user.id, "user ID");
-    return <>Hello</>;
+  const userID = await getSessionId();
+  if (!userID) {
+    return <>Not Authorized</>;
   }
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/users/posts/${session.user.id}`,
-    {
-      next: { revalidate: 10 },
-    }
+  const posts: postType[] = await apiCall(`api/users/posts/${userID}`);
+  return (
+    <section className="w-full flex flex-col gap-10">
+      <TitleDesc
+        title="My Profile"
+        desc="Welcome to your personalized profile page"
+        backgroundColor="text-blue-500"
+      />
+      <Profile posts={posts} />
+    </section>
   );
-  const posts = await response.json();
-  return <MyProfile posts={posts} />;
 };
 
 export default page;

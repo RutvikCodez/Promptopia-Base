@@ -1,45 +1,25 @@
 "use client";
-import React, { FormEvent, useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import PromptForm from "@components/reusable/PromptForm";
+import { updatePromptFormDataType } from "@utils/types";
 import { useRouter } from "next/navigation";
-import Form from "@components/create-prompt/Form";
+import React from "react";
 
-type promptData = {
-  prompt: string;
-  tag: string;
-  promptID: string
-};
+const UpdatePrompt = ({
+  promptID,
+  promptDefaultValue,
+  tagDefaultValue,
+}: updatePromptFormDataType) => {
 
-const UpdatePrompt = ({ prompt, tag, promptID }: promptData) => {
-  const [submitting, setSubmitting] = useState<boolean>(false);
-  const session = useSession();
+  
   const router = useRouter();
-  const [post, setPost] = useState<{
-    prompt: string;
-    tag: string;
-  }>({
-    prompt: "",
-    tag: "",
-  });
-  useEffect(() => {
-    setPost({
-      prompt: prompt,
-      tag: tag,
-    });
-  }, []);
-
-  const updatePrompt = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitting(true);
-    if (!session.data?.user.id) {
-      return;
-    }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const updatePrompt = async (values: any) => {
     try {
       const response = await fetch(`/api/prompt/${promptID}`, {
         method: "PATCH",
         body: JSON.stringify({
-          prompt: post.prompt,
-          tag: post.tag,
+          prompt: values.prompt || promptDefaultValue,
+          tag: values.tag || tagDefaultValue,
         }),
       });
       if (response.ok) {
@@ -47,17 +27,15 @@ const UpdatePrompt = ({ prompt, tag, promptID }: promptData) => {
       }
     } catch (error) {
       console.log("Error in updating Prompt", error);
-    } finally {
-      setSubmitting(false);
     }
   };
   return (
-    <Form
-      handleSubmit={updatePrompt}
-      post={post}
-      setPost={setPost}
-      submitting={submitting}
-      type="Edit"
+    <PromptForm
+      title="Edit Post"
+      desc="Edit and share amazing prompts with the world, and let your imagination run wild with any AI-powered platform"
+      onSubmit={updatePrompt}
+      promptDefaultValue={promptDefaultValue}
+      tagDefaultValue={tagDefaultValue}
     />
   );
 };

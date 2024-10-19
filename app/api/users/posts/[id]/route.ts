@@ -1,10 +1,7 @@
 import Prompt from "@models/prompt";
 import { connectToDB } from "@utils/database";
+import { Slug } from "@utils/types";
 import { NextRequest, NextResponse } from "next/server";
-
-type Slug = {
-  id: string;
-};
 
 export async function GET(request: NextRequest, { params }: { params: Slug }) {
   try {

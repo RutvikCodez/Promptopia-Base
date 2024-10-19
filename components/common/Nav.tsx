@@ -3,7 +3,8 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import useProviders from "./providers/useProviders";
+import useProviders from "../provider/useProvider";
+
 
 const Nav = () => {
   const session = useSession();

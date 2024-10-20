@@ -19,7 +19,6 @@ const CreatePrompt = ({ userId }: userIdType) => {
         }),
       });
       if (response.ok) {
-        revalidatePath('/api/prompts')
         router.push("/");
       }
     } catch (error) {

@@ -11,7 +11,7 @@ export default async function Home() {
   if (!userID) {
     return <NotAuthorized />;
   }
-  const posts: postType[] = await apiCall("api/prompt");
+  // const posts: postType[] = await apiCall("api/prompt");
   return (
     <section className="w-full flex flex-col justify-center items-center gap-10">
       <div className="flex flex-col items-center text-center">
@@ -21,7 +21,7 @@ export default async function Home() {
           title=" Discover & Share"
           subtitle="AI-Powered Prompts"
         />
-        <Feed data={posts} />
+        {/* <Feed data={posts} /> */}
       </div>
     </section>
   );

@@ -22,6 +22,7 @@ const PromptCard = ({
   };
 
   return (
+    // mongodb+srv://darjirutvik47:Rutvik123Rutvik123@cluster0.kxpqdz1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
     <Card className="flex-1 break-inside-avoid rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-2 backdrop-blur-lg backdrop-filter w-full h-fit">
       <CardHeader className="w-full">
         <div className="flex w-full justify-between items-center">

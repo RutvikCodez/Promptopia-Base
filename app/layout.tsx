@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@utils/authOption";
 import MobileNavbar from "@components/common/MobileNavbar";
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "Promptopia",

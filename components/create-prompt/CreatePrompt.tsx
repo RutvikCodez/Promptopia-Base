@@ -1,6 +1,7 @@
 "use client";
 import PromptForm from "@components/reusable/PromptForm";
 import { userIdType } from "@utils/types";
+import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "sonner";
@@ -18,6 +19,7 @@ const CreatePrompt = ({ userId }: userIdType) => {
         }),
       });
       if (response.ok) {
+        revalidatePath('/api/prompts')
         router.push("/");
       }
     } catch (error) {

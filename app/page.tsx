@@ -5,7 +5,13 @@ import Feed from "@components/landigPage/Feed";
 
 
 export default async function Home() {
-  const posts: postType[] = await apiCall("api/prompt");
+  const response = await await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getAllPrompt`,
+    {
+      next: { revalidate: 10 },
+    }
+  );
+  const posts = await response.json();
   return (
     <section className="w-full flex flex-col justify-center items-center gap-10">
       <div className="flex flex-col items-center text-center">

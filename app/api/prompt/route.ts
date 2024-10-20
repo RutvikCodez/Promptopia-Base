@@ -9,7 +9,7 @@ export const GET = async () => {
     console.log(prompts);
 
     return new NextResponse(JSON.stringify(prompts), {
-      status: 200,
+      status: 201,
     });
   } catch (error) {
     console.log(error);

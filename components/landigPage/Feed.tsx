@@ -9,6 +9,8 @@ const Feed = ({ data }: { data: postType[] }) => {
   useEffect(() => {
     setPosts(data);
   }, [data]);
+console.log(posts, "posts onm client side");
+console.log(data, "data on server side");
 
   return (
     <div className="mx-auto w-full flex justify-center items-center flex-col gap-5">

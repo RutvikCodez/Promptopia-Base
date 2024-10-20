@@ -9,10 +9,7 @@ export const GET = async () => {
     console.log(prompts);
 
     return new NextResponse(JSON.stringify(prompts), {
-      status: 201,
-      headers: {
-        "Cache-Control": "no-store", // This ensures the response is not cached
-      },
+      status: 200,
     });
   } catch (error) {
     console.log(error);

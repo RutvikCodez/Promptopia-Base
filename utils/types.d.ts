@@ -147,6 +147,14 @@ export type drawerType = {
 };
 
 export type commonNavbarType = {
-  userID: string
-  children: ReactNode
-}
+  userID: string;
+  children: ReactNode;
+};
+
+export type authWrapperType = {
+  inputData: magicField[];
+  onSubmit: (values: any) => void;
+  title: string;
+  desc: string;
+  authType: "In" | "Up";
+};

@@ -17,7 +17,7 @@ export const searchFormData: magicField[] = [
         })
         .trim(),
       className:
-        "w-full-rounded-md block border bordergray-200 bg-white font-satoshi text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0 peer text-center",
+        "w-full rounded-md block font-satoshi text-sm shadow-lg font-medium",
     },
     RenderComponent: CustomInput,
   },
@@ -59,6 +59,90 @@ export const promptFormData: magicField[] = [
   },
 ];
 
+export const signInInputData: magicField[] = [
+  {
+    type: "input",
+    config: {
+      name: "email",
+      type: "email",
+      label: "Email",
+      placeholder: "m@example.com",
+      validation: z
+        .string()
+        .trim()
+        .min(1, {
+          message: "Email is required",
+        })
+        .trim(),
+    },
+    RenderComponent: CustomInput,
+  },
+  {
+    type: "input",
+    config: {
+      name: "password",
+      type: "password",
+      label: "Password",
+      placeholder: "********",
+      validation: z
+        .string()
+        .trim()
+        .min(1, {
+          message: "Password is required",
+        })
+        .trim(),
+    },
+    RenderComponent: CustomInput,
+  },
+];
+
+export const signUpInputData: magicField[] = [
+  {
+    type: "input",
+    config: {
+      name: "email",
+      type: "email",
+      label: "Email",
+      placeholder: "m@example.com",
+      validation: z
+        .string()
+        .trim()
+        .min(1, {
+          message: "Email is required",
+        })
+        .trim(),
+    },
+    RenderComponent: CustomInput,
+  },
+  {
+    type: "input",
+    config: {
+      name: "password",
+      type: "password",
+      label: "Password",
+      placeholder: "********",
+      validation: z
+        .string()
+        .trim()
+        .min(1, {
+          message: "Password is required",
+        })
+        .trim(),
+    },
+    RenderComponent: CustomInput,
+  },
+  {
+    type: "input",
+    config: {
+      name: "image",
+      type: "file",
+      label: "Profile Image",
+      placeholder: "Select Profile Image",
+      validation: z.string(),
+    },
+    RenderComponent: CustomInput,
+  },
+];
 
 export const navData = [
   {
@@ -67,6 +151,6 @@ export const navData = [
   },
   {
     href: "/create-prompt",
-    name: "Create Prompt"
-  }
-]
+    name: "Create Prompt",
+  },
+];

@@ -45,6 +45,7 @@ const MobileNavbar = ({ id, image }: userType) => {
               onClick={() => {
                 signOut();
               }}
+              key={3}
               className="ounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black w-fit hover:text-white text-center text-sm font-inter flex items-center justify-center"
               aria-label="Sign Out"
             >

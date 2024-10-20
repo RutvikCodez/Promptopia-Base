@@ -1,15 +1,15 @@
-import PromptCard from "@components/reusable/PromptCard";
 import TitleDesc from "@components/reusable/TitleDesc";
-import SearchForm from "@components/landigPage/SearchForm";
 import { apiCall } from "@utils/apiCall";
 import { postType } from "@utils/types";
 import { getSessionId } from "@utils/getSessionId";
 import Feed from "@components/landigPage/Feed";
+import NotAuthorized from "@components/common/NotAuthorized";
+
 
 export default async function Home() {
   const userID = await getSessionId();
   if (!userID) {
-    return <>Not Authorized</>;
+    return <NotAuthorized />;
   }
   const posts: postType[] = await apiCall("api/prompt");
   return (

@@ -2,12 +2,46 @@ import User from "@models/user";
 import { connectToDB } from "@utils/database";
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialProvider from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    }),
+    CredentialProvider({
+      name: "Credentials",
+      credentials: {
+        email: {},
+        password: {},
+      },
+      async authorize(credentials) {
+        if (!credentials) {
+          throw new Error("Please enter your email and password");
+        }
+        const { email, password } = credentials;
+        // console.log("received email and password", email, password);
+        
+        try {
+          await connectToDB();
+          const userExists = await User.findOne({ email: email });
+          if (!userExists) {
+            throw new Error("User Does Not Exist");
+          }
+          console.log(userExists, "user details");
+          
+          return {
+            id: userExists._id.toString(),
+            email: userExists.email,
+            username: userExists.username,
+            image: userExists.image,
+          };
+        } catch (error) {
+          console.error("Error in signIn callback", error);
+          return null;
+        }
+      },
     }),
   ],
   callbacks: {

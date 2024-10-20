@@ -10,7 +10,7 @@ export async function GET(request: NextRequest, { params }: { params: Slug }) {
     const prompts = await Prompt.find({
       creator: userId,
     }).populate("creator");
-    return new NextResponse(JSON.stringify(prompts), { status: 201 });
+    return new NextResponse(JSON.stringify(prompts), { status: 200 });
   } catch (error) {
     console.log(error);
     return new NextResponse("Failed to fetch prompts created by user", {

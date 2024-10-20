@@ -7,8 +7,13 @@ export const GET = async () => {
     await connectToDB();
     const prompts = await Prompt.find({}).populate("creator");
     console.log(prompts);
-    
-    return new NextResponse(JSON.stringify(prompts), { status: 201 });
+
+    return new NextResponse(JSON.stringify(prompts), {
+      status: 201,
+      headers: {
+        "Cache-Control": "no-store", // This ensures the response is not cached
+      },
+    });
   } catch (error) {
     console.log(error);
     return new NextResponse("Failed to fetch prompts", { status: 500 });

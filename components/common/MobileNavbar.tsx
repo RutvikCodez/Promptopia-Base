@@ -28,7 +28,7 @@ const MobileNavbar = ({ id, image }: userType) => {
         >
           <ul className="flex flex-col gap-5 px-5 h-full w-full justify-center">
             {navData.map(({ href, name }, index) => (
-              <>
+              <React.Fragment key={index}>
                 <li key={index}>
                   <Link
                     href={href}
@@ -38,7 +38,7 @@ const MobileNavbar = ({ id, image }: userType) => {
                   </Link>
                 </li>
                 <hr />
-              </>
+              </React.Fragment>
             ))}
             <Button
               type="button"

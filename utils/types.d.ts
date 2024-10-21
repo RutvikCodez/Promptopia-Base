@@ -111,6 +111,7 @@ export type promptFormDataType = {
   onSubmit: (values: any) => void;
   promptDefaultValue?: string;
   tagDefaultValue?: string;
+  form: UseFormReturn<FieldValues, any, undefined>;
 };
 
 export type userIdType = {
@@ -157,4 +158,11 @@ export type authWrapperType = {
   title: string;
   desc: string;
   authType: "In" | "Up";
+};
+
+export type profileType = {
+  posts: postType[];
+  onDelete: (id: string) => Promise<void>;
+  fetchPosts: (id: string) => Promise<postType[]>;
+  userID: string;
 };

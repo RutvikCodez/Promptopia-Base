@@ -13,10 +13,11 @@ const PromptForm = ({
   title,
   promptDefaultValue,
   tagDefaultValue,
+  form,
 }: promptFormDataType) => {
-  const form = useForm({
-    resolver: ArrayToZodResolver(promptFormData),
-  });
+  // const form = useForm({
+  //   resolver: ArrayToZodResolver(promptFormData),
+  // });
   const isSubmitting = form.formState.isSubmitting;
   if (promptDefaultValue) {
     form.setValue("prompt", promptDefaultValue);

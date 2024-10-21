@@ -12,7 +12,13 @@ export const POST = async (req: NextRequest) => {
       prompt: prompt,
     });
     await newPrompt.save();
-    return new NextResponse(JSON.stringify(newPrompt), { status: 201 });
+    const prompts = await Prompt.find({}).populate("creator");
+    console.log(prompts);
+
+    return new NextResponse(JSON.stringify(prompts), {
+      status: 200,
+    });
+    // return new NextResponse(JSON.stringify(newPrompt), { status: 201 });
   } catch (error) {
     console.log(error);
     return new NextResponse("Failed to create new prompt", { status: 500 });

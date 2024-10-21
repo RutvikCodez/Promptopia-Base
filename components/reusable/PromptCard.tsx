@@ -3,6 +3,18 @@ import React, { useState } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import Image from "next/image";
 import { promptCardType } from "@utils/types";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 
 const PromptCard = ({
   prompt,
@@ -72,12 +84,31 @@ const PromptCard = ({
           >
             Edit
           </p>
-          <p
-            className="font-inter text-sm bg-gradient-accent-1 cursor-pointer bg-clip-text text-transparent"
-            onClick={onDelete}
-          >
-            Delete
-          </p>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <p
+                className="font-inter text-sm bg-gradient-accent-1 cursor-pointer bg-clip-text text-transparent"
+              >
+                Delete
+              </p>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>
+                  Are you sure you want to delete this prompt?
+                </AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. Deleting this prompt will
+                  permanently remove it from the system and you will not be able
+                  to recover it later.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction  onClick={onDelete}>Delete Prompt</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </CardFooter>
       )}
     </Card>

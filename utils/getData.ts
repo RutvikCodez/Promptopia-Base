@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { magicField } from "./types";
+import { magicField, postType } from "./types";
 import CustomInput from "@components/custom/input";
 import CustomTextarea from "@components/custom/textarea";
 
@@ -152,5 +152,63 @@ export const navData = [
   {
     href: "/create-prompt",
     name: "Create Prompt",
+  },
+];
+
+export const posts: postType[] = [
+  {
+    _id: "1",
+    prompt: "How to implement authentication in Next.js?",
+    tag: "webdev",
+    creator: {
+      _id: "101",
+      image: "/assets/images/user1.jpg",
+      username: "devMaster",
+      email: "devmaster@example.com",
+    },
+  },
+  {
+    _id: "2",
+    prompt: "What is modular arithmetic?",
+    tag: "math",
+    creator: {
+      _id: "102",
+      image: "/assets/images/user4.jpg",
+      username: "mathGenius",
+      email: "mathgenius@example.com",
+    },
+  },
+  {
+    _id: "3",
+    prompt: "Explain the benefits of using TypeScript with React.",
+    tag: "typescript",
+    creator: {
+      _id: "103",
+      image: "/assets/images/user1.jpg",
+      username: "typeWizard",
+      email: "typewizard@example.com",
+    },
+  },
+  {
+    _id: "4",
+    prompt: "Best practices for writing clean code in JavaScript.",
+    tag: "coding",
+    creator: {
+      _id: "104",
+      image: "/assets/images/user4.jpg",
+      username: "cleanCoder",
+      email: "cleancoder@example.com",
+    },
+  },
+  {
+    _id: "5",
+    prompt: "How to optimize MongoDB queries for performance?",
+    tag: "database",
+    creator: {
+      _id: "105",
+      image: "/assets/images/user1.jpg",
+      username: "dbPro",
+      email: "dbpro@example.com",
+    },
   },
 ];

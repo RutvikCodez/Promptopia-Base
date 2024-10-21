@@ -36,6 +36,7 @@ export default async function RootLayout({
               image={session?.user.image || ""}
             />
             {children}
+            <Analytics />
           </main>
           <Toaster position="top-right" richColors />
         </Provider>

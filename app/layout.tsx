@@ -26,7 +26,7 @@ export default async function RootLayout({
           <div className="main">
             <div className="gradient" />
           </div>
-          <main className="relative z-10 flex justify-center items-center flex-col max-w-6xl mx-auto gap-14 max-md:px-5">
+          <main className="relative z-10 flex justify-center items-center flex-col max-w-6xl mx-auto gap-14 max-xl:px-5">
             <Nav
               id={session?.user.id || ""}
               image={session?.user.image || ""}

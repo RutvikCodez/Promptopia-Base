@@ -21,16 +21,12 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Please enter your email and password");
         }
         const { email, password } = credentials;
-        // console.log("received email and password", email, password);
-        
         try {
           await connectToDB();
           const userExists = await User.findOne({ email: email });
           if (!userExists) {
             throw new Error("User Does Not Exist");
           }
-          console.log(userExists, "user details");
-          
           return {
             id: userExists._id.toString(),
             email: userExists.email,

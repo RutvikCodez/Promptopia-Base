@@ -40,7 +40,6 @@ export async function DELETE(req: NextRequest, { params }: { params: Slug }) {
   try {
     await connectToDB();
     const promptID = params.id;
-    console.log(promptID, "useID");
     if (!promptID) {
       return new NextResponse("ID Not Provided", { status: 400 });
     }
@@ -48,7 +47,7 @@ export async function DELETE(req: NextRequest, { params }: { params: Slug }) {
     if (!deletePrompt) {
       return new NextResponse("Prompt Not Found", { status: 404 });
     }
-    return new NextResponse("Prompt Deleted SuccessFully", { status: 201 });
+    return new NextResponse(JSON.stringify(deletePrompt), { status: 201 });
   } catch (error) {
     console.log(error);
     return new NextResponse("Failed to delete prompt", { status: 500 });

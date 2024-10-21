@@ -13,8 +13,6 @@ export const POST = async (req: NextRequest) => {
     });
     await newPrompt.save();
     const prompts = await Prompt.find({}).populate("creator");
-    console.log(prompts);
-
     return new NextResponse(JSON.stringify(prompts), {
       status: 200,
     });

@@ -3,6 +3,7 @@ import React from "react";
 import { postType } from "@utils/types";
 import { useRouter } from "next/navigation";
 import PromptCard from "@components/reusable/PromptCard";
+import { toast } from "sonner";
 
 const Profile = ({ posts }: { posts: postType[] }) => {
   const router = useRouter();
@@ -22,9 +23,13 @@ const Profile = ({ posts }: { posts: postType[] }) => {
           }}
           onDelete={async () => {
             try {
-              await fetch(`/api/prompt/${_id}`, {
+              const response = await fetch(`/api/prompt/${_id}`, {
                 method: "DELETE",
               });
+              if (response.ok) {
+                toast.success("Prompt deleted successfully!");
+                router.push("/");
+              }
             } catch (error) {
               console.log(error);
             }

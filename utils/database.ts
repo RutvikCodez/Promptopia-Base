@@ -8,8 +8,6 @@ export const connectToDB = async () => {
     if (!uri) {
       throw new Error("MongoDB_URI is not defined in environment variable");
     }
-    console.log("Mongo DB is connected");
-    
     await mongoose.connect(uri, { dbName: "share_prompt" });
   } catch (error) {
     console.log("Error connecting to MongoDB", error);

@@ -23,7 +23,6 @@ const CreatePrompt = ({ userId }: userIdType) => {
           tag: values.tag,
         }),
       });
-      const data = await response.json();
       if (response.ok) {
         router.push("/");
       }

@@ -12,10 +12,6 @@ export const GET = async (req: NextRequest) => {
   }
   try {
     await connectToDB();
-    if (query?.trim() == "") {
-      const prompts = await Prompt.find({}).populate("creator");
-      return new NextResponse(JSON.stringify(prompts), { status: 201 });
-    }
     const user = await User.findOne({
       username: regQuery,
     });

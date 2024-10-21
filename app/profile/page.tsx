@@ -5,7 +5,6 @@ import { getSessionId } from "@utils/getSessionId";
 import { postType } from "@utils/types";
 import React from "react";
 
-
 const page = async () => {
   const userID = await getSessionId();
   if (!userID) {
